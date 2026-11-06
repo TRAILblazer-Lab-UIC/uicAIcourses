@@ -1,4 +1,4 @@
-<!-- UIC AI Course Explorer: paste this whole block where the widget should appear. -->
+<!-- UIC Undergraduate AI Course Explorer: paste this whole block where the widget should appear. -->
 <!-- Option on the div: data-tab="explore|pathways|ready|saved" sets the starting tab -->
 <div data-uic-ai-courses style="max-width:1200px;margin:0 auto"></div>
 <script>
@@ -107,13 +107,13 @@
     var s = META.stats;
     this.root.innerHTML = "<style>" + CSS + "</style>" + '<div class="w">' +
       '<div class="hd"><p class="kicker">University of Illinois Chicago</p>' +
-      "<h2>Explore AI Courses at UIC</h2>" +
-      '<p class="sub">Find courses where you can learn about, use, or build artificial intelligence. See what you need before you enroll, read a plain-language guide to each course, and find who to ask.</p>' +
-      '<ul class="stats"><li><b>' + s.distinct_courses + "</b>courses</li><li><b>" + s.colleges + "</b>colleges</li><li><b>" + C.filter(function (c) { return c.tier === 1; }).length + "</b>directly related to AI</li><li><b>" + C.filter(isBeginner).length + "</b>for AI beginners</li></ul></div>" +
+      "<h2>Explore Undergraduate AI Courses at UIC</h2>" +
+      '<p class="sub">Find undergraduate courses where you can learn about, use, or build artificial intelligence. See what you need before you enroll, read a plain-language guide to each course, and find who to ask.</p>' +
+      '<ul class="stats"><li><b>' + s.distinct_courses + "</b>undergraduate courses</li><li><b>" + s.colleges + "</b>colleges</li><li><b>" + C.filter(function (c) { return c.tier === 1; }).length + "</b>directly related to AI</li><li><b>" + C.filter(isBeginner).length + "</b>for AI beginners</li></ul></div>" +
       '<div class="tabs" role="tablist" aria-label="Sections">' +
       this.tabBtn("explore", "Find courses") + this.tabBtn("pathways", "Pathways") + this.tabBtn("ready", "Getting ready for AI") +
       this.tabBtn("saved", 'My list <span class="badge" data-savedcount>0</span>') + "</div>" +
-      '<p class="notice"><strong>Catalog information only.</strong> Course text is from the ' + esc(META.catalog_year) + " UIC course catalog, checked " + esc(META.retrieved_label) + ". Ask the department or your advisor before planning your schedule.</p>" +
+      '<p class="notice"><strong>Undergraduate courses only.</strong> Every course here is from the ' + esc(META.catalog_year) + " UIC Undergraduate Catalog (text checked " + esc(META.retrieved_label) + "). Graduate-only courses (500-level and above) are not included. A few listed courses are limited to graduate or professional programs and are marked <em>Program-restricted</em>. Catalog information only: ask the department or your advisor before planning your schedule.</p>" +
       '<div class="panel" role="tabpanel" data-panel="explore" aria-labelledby="' + this.uid + '-tab-explore"></div>' +
       '<div class="panel" role="tabpanel" data-panel="pathways" aria-labelledby="' + this.uid + '-tab-pathways"></div>' +
       '<div class="panel" role="tabpanel" data-panel="ready" aria-labelledby="' + this.uid + '-tab-ready"></div>' +
@@ -171,7 +171,7 @@
     var depts = uniq(flat(C.map(function (c) { return c.departments; }))).sort();
     var html =
       '<section class="finder" aria-labelledby="' + u + '-fh"><div class="finder-hd"><h3 id="' + u + '-fh">Find courses</h3><button type="button" class="linkbtn" data-clear>Clear all selections</button></div>' +
-      '<p class="finder-hint">Select as many options as you like. They combine to narrow the list below.</p>' +
+      '<p class="finder-hint">Search undergraduate courses. Select as many options as you like; they combine to narrow the list below.</p>' +
       '<div class="step"><p class="step-t">How related to AI? <span>(choose one or more)</span></p><div class="rel" role="group" aria-label="How related to AI">' + rel + "</div></div>" +
       '<div class="step"><p class="step-t">New to AI?</p>' +
       '<button type="button" class="tog beg" data-beginner aria-pressed="false"><span class="bi" aria-hidden="true">🌱</span><span class="grow"><span class="bt">For AI beginners</span>' +
@@ -244,7 +244,7 @@
     var list = C.filter(function (c) { return matches(c, f); });
     var srt = this.state.tableSort && this.state.view === "table" ? this.state.tableSort : null;
     list.sort(srt ? function (a, b) { return srt.dir * cmpCol(a, b, srt.col) || SORTS.code(a, b); } : SORTS[this.state.sort]);
-    var countText = list.length === C.length ? "All " + C.length + " courses" : list.length + " of " + C.length + " courses match";
+    var countText = list.length === C.length ? "All " + C.length + " undergraduate courses" : list.length + " of " + C.length + " undergraduate courses match";
     this.$("[data-count]").textContent = countText;
     this.$("[data-live]").textContent = countText;
     var active = this.activePills();
@@ -302,7 +302,7 @@
       var dir = ts.col === col ? (ts.dir > 0 ? "ascending" : "descending") : "none";
       return '<th scope="col" aria-sort="' + dir + '"><button type="button" data-tsort="' + col + '">' + label + (ts.col === col ? (ts.dir > 0 ? " ▲" : " ▼") : "") + "</button></th>";
     }
-    return '<div class="tablewrap"><table><caption class="vh">AI-related courses</caption><thead><tr>' + th("code", "Course") + th("title", "Title") + th("rel", "Related to AI") + th("level", "Level") + th("coding", "Coding") + th("college", "College") + '<th scope="col"><span class="vh">Save</span></th></tr></thead><tbody>' +
+    return '<div class="tablewrap"><table><caption class="vh">AI-related undergraduate courses</caption><thead><tr>' + th("code", "Course") + th("title", "Title") + th("rel", "Related to AI") + th("level", "Level") + th("coding", "Coding") + th("college", "College") + '<th scope="col"><span class="vh">Save</span></th></tr></thead><tbody>' +
       list.map(function (c) {
         return '<tr class="t' + c.tier + '"><td class="tc">' + esc(codeLabel(c)) + '</td><td><button type="button" class="linkbtn" data-open="' + esc(c.id) + '">' + esc(c.title) + "</button></td><td>" + esc(REL[c.tier].short) + "</td><td>" + esc(META.levels[c.level].label) + (c.restricted ? " · restricted" : "") + "</td><td>" + esc(c.coding) + "</td><td>" + esc(c.colleges.map(function (x) { return x.replace(/^College of /, ""); }).join("; ")) + "</td><td>" + self.starBtn(c) + "</td></tr>";
       }).join("") + "</tbody></table></div>";
@@ -332,7 +332,8 @@
       ["Prior AI needed?", c.prior_ai + " (" + YN[c.prior_ai] + ")"]
     ];
     if (c.gen_ed.length) facts.push(["UIC Gen Ed", c.gen_ed.join("; ")]);
-    facts.push(["Catalogs", c.in_grad_catalog ? "Undergraduate & Graduate" : "Undergraduate"]);
+    facts.push(["Course level", "Undergraduate Catalog" + (c.in_grad_catalog ? " (also listed in the Graduate Catalog)" : "")]);
+    if (c.restricted) facts.push(["Who can enroll", "Limited to a graduate or professional program"]);
     var links = c.listings.map(function (l) {
       return '<a class="btn" href="' + esc(l.catalog_url) + '" target="_blank" rel="noopener">' + esc(l.code) + ' in the UIC catalog ↗<span class="vh"> (opens in new tab)</span></a>';
     }).join("") +
@@ -350,7 +351,7 @@
       "<dt>Experience level: " + esc(META.levels[c.level].label) + (c.restricted ? " · program-restricted" : "") + "</dt><dd>" + esc(META.levels[c.level].blurb) + "</dd>" +
       "<dt>What to have before you start</dt><dd>" + esc(g.prepare) + "</dd></dl>" +
       '<p class="disc">Written by Claude, an AI assistant, from the catalog text. This is not an official UIC description, so check details with the department or your advisor.</p></section>' +
-      '<section class="sec official"><h4>Catalog description</h4><p>' + esc(c.description) + '</p><p class="src">Official text, word for word, from the UIC catalog.</p></section>' +
+      '<section class="sec official"><h4>Catalog description</h4><p>' + esc(c.description) + '</p><p class="src">Official text, word for word, from the UIC Undergraduate Catalog.</p></section>' +
       '<section class="sec"><h4>Prerequisites</h4><p>' + (c.prerequisites ? linkCodes(c.prerequisites) : "<em>None listed in the catalog.</em>") + "</p></section>" +
       '<section class="sec"><h4>How it relates to AI</h4><p><strong>' + esc(REL[c.tier].name) + ".</strong> " + esc(REL[c.tier].desc) + "</p><p>" + esc(c.likely_ai) + "</p></section>" +
       contactHTML(c) +
@@ -403,7 +404,7 @@
     function codes(list) { return '<div class="codes">' + list.filter(function (x) { return BY_CODE[x]; }).map(function (x) { return '<button type="button" data-open="' + x + '">' + x + "</button>"; }).join("") + "</div>"; }
     function gl(t, d) { return "<details><summary>" + esc(t) + "</summary><p>" + esc(d) + "</p></details>"; }
     var html = '<div class="gr"><h3>What does it take to learn AI?</h3>' +
-      "<p>You don't have to be a programmer to study AI. There are three broad ways to get involved, and each needs different preparation. Most people end up mixing them.</p>" +
+      "<p>These are all undergraduate courses, and you don't have to be a programmer to study AI. There are three broad ways to get involved, and each needs different preparation. Most people end up mixing them.</p>" +
       '<div class="routes">' +
       '<div class="route"><span class="ri" aria-hidden="true">🧭</span><h4>Understand and question AI</h4><p>Learn how AI affects people, fairness, work, media and democracy, and how to judge claims about it.</p>' +
       '<p class="lbl">Skills that help</p><ul><li>Careful reading and writing</li><li>Discussion and argument</li><li>Curiosity about technology and society</li></ul>' +
@@ -452,14 +453,14 @@
       '<a class="btn ghost" data-mail href="#">Email list</a><button type="button" class="btn ghost" data-print>Print list</button>' +
       '<button type="button" class="btn ghost" data-clearsaved>Clear list</button><span class="status" role="status" data-status></span></div>' +
       '<div class="grid">' + list.map(function (c) { return self.cardHTML(c); }).join("") + "</div>";
-    this.$("[data-mail]").setAttribute("href", "mailto:?subject=" + encodeURIComponent("UIC AI courses I'm considering") + "&body=" + encodeURIComponent(this.savedText()));
+    this.$("[data-mail]").setAttribute("href", "mailto:?subject=" + encodeURIComponent("UIC undergraduate AI courses I'm considering") + "&body=" + encodeURIComponent(this.savedText()));
   };
 
   function contactText(c) {
     return c.contacts.map(function (k) { return k.email || k.url; }).filter(Boolean).join(", ");
   }
   Widget.prototype.savedText = function () {
-    return "UIC AI courses I'm considering:\n\n" + this.state.saved.map(function (id) {
+    return "UIC undergraduate AI courses I'm considering:\n\n" + this.state.saved.map(function (id) {
       var c = BY_CODE[id]; if (!c) return "";
       return codeLabel(c) + ": " + c.title + " (" + c.hours + "; " + REL[c.tier].name + "; " + META.levels[c.level].label + ")\n  Prerequisites: " + (c.prerequisites || "None listed") +
         "\n  Catalog: " + c.listings[0].catalog_url + "\n  Department contact: " + contactText(c);
@@ -552,7 +553,7 @@
   Widget.prototype.printSaved = function () {
     var list = this.state.saved.map(function (id) { return BY_CODE[id]; }).filter(Boolean);
     var color = { 1: "#001E62", 2: "#D50032", 3: "#5B6B82" };
-    var body = "<h1 style='color:#001E62'>UIC AI courses I'm considering</h1><p style='color:#555'>Catalog information only. Course text from the " + esc(META.catalog_year) + " UIC catalog. Ask the department or your advisor before planning your schedule.</p>" +
+    var body = "<h1 style='color:#001E62'>UIC undergraduate AI courses I'm considering</h1><p style='color:#555'>Catalog information only. Course text from the " + esc(META.catalog_year) + " UIC Undergraduate Catalog. Ask the department or your advisor before planning your schedule.</p>" +
       list.map(function (c) {
         return "<div style='border-left:6px solid " + color[c.tier] + ";padding:6px 12px;margin:12px 0;break-inside:avoid'><h2 style='margin:0;font-size:16px'>" + esc(codeLabel(c)) + ": " + esc(c.title) + "</h2>" +
           "<p style='margin:4px 0;font-size:13px;color:#555'>" + esc(c.hours) + " · " + esc(REL[c.tier].name) + " · " + esc(META.levels[c.level].label) + "</p>" +

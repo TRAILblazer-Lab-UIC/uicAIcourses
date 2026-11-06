@@ -1,6 +1,6 @@
-# Explore AI Courses at UIC
+# Explore Undergraduate AI Courses at UIC
 
-A self-contained course browser for the 83 AI-related courses (90 catalog listings) in the University of Illinois Chicago 2026–2027 catalog. It has no database, no server and no outside libraries, and makes no network requests: course data is built into the file, and links to the UIC catalog open in a new tab.
+A self-contained course browser for the 83 AI-related **undergraduate** courses (90 listings) in the University of Illinois Chicago 2026–2027 Undergraduate Catalog. Graduate-only courses (500-level and above) are not included. A few listed courses are limited to graduate or professional programs; the widget marks them "Program-restricted". It has no database, no server and no outside libraries, and makes no network requests: course data is built into the file, and links to the UIC catalog open in a new tab.
 
 **Live demo:** https://trailblazer-lab-uic.github.io/uicAIcourses/
 
@@ -25,7 +25,7 @@ Course titles, descriptions and prerequisites are quoted word for word from the 
 
 **3. iframe (for a CMS that strips `<script>` tags).**
 ```html
-<iframe src="https://trailblazer-lab-uic.github.io/uicAIcourses/" title="Explore AI Courses at UIC"
+<iframe src="https://trailblazer-lab-uic.github.io/uicAIcourses/" title="Explore Undergraduate AI Courses at UIC"
         style="width:100%;height:1400px;border:0"></iframe>
 ```
 
@@ -39,5 +39,5 @@ To link straight to a course, add its code to the page URL, for example `https:/
 
 The widget runs inside a Shadow DOM, so the host site's CSS won't change its look and its CSS won't leak out. It uses UIC navy and red, works from 320 px phones up, and supports keyboard navigation and screen readers. "My list" is saved only in each visitor's own browser.
 
-## Catalog information only
-Not every course is offered every semester. Check with the department or an advisor before planning a schedule.
+## Undergraduate catalog information only
+All courses come from the UIC Undergraduate Catalog. Not every course is offered every semester. Check with the department or an advisor before planning a schedule.
