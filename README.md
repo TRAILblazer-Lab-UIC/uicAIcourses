@@ -12,6 +12,7 @@ Course titles, descriptions and prerequisites are quoted word for word from the 
 | `index.html` | The widget as a full page (the live demo) |
 | `uic-ai-courses.js` | The widget as one script file |
 | `uic-ai-courses-embed.html` | The widget as one paste-in block (`<div>` + `<script>`) |
+| `UIC-AI-Courses-Guide.pdf` | The printable course guide, linked from the widget header |
 
 ## Adding it to another site
 
@@ -36,6 +37,7 @@ To link straight to a course, add its code to the page URL, for example `https:/
 |---|---|---|
 | `data-tab` | `explore`, `pathways`, `ready`, `saved` (starting tab) | `explore` |
 | `data-deeplink` | `on`: keeps the open course in the URL hash | off |
+| `data-pdf` | URL of the PDF for the "Download all courses as a PDF" button | `https://trailblazer-lab-uic.github.io/uicAIcourses/UIC-AI-Courses-Guide.pdf` |
 
 The widget runs inside a Shadow DOM, so the host site's CSS won't change its look and its CSS won't leak out. It uses UIC navy and red, works from 320 px phones up, and supports keyboard navigation and screen readers. "My list" is saved only in each visitor's own browser.
 
